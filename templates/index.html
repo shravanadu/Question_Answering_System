@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Q&A BOT</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+
+
+
+  <style>
+  @font-face {
+    /*font-family: myFirstFont;*/
+    src: url('https://fonts.googleapis.com/css?family=Lato:400,700');
+    /*font-weight: bold;*/
+  }
+  /*@import url('https://fonts.googleapis.com/css?family=Lato:400,700');*/
+  *, *:before, *:after {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-image: url("/static/images/world_map.png");
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+  }
+
+  div.sansserif {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 750px;
+    /*height: 640px;*/
+    background: #1A5276;
+    background: #1A5276;
+    border-radius: 10px;
+    border: 0px solid #1A5276;
+  }
+
+  .people-list {
+    background: #1A5276;
+    width: 260px;
+   /* height: 620px;*/
+    float: left;
+  }
+  .people-list .search {
+    padding: 15px;/*20*/
+  }
+  .people-list input {
+    border-radius: 3px;
+    border: none;
+    padding: 14px;
+    color: white;
+    background: #6A6C75;
+    width: 90%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+  }
+  .people-list .fa-search {
+    position: relative;
+    left: -25px;
+  }
+  .people-list ul {
+   padding: 10px;
+  /* height: 500px;*/
+  }
+  .people-list ul li {
+    /*padding-bottom: 20px;*/
+  }
+  .people-list img {
+    background: #484537;
+    float: left;
+    padding-left: 20px;
+  }
+  .people-list .about {
+    float: left;
+    margin-top: 8px;
+  }
+  .people-list .about {
+    padding-left: 8px;
+  }
+  .people-list .status {
+    color: #92959E;
+  }
+
+  .people-list .avatar {
+    background: #1A5276;
+    width: 100px;/*220*/
+    /*height: 250px;*/
+    height: 200px;
+    /*padding-left: 0px;*/
+    padding-bottom: 20px;
+  }
+
+  div.project {
+    font-size: 19px;
+    font-family: Arial, sans-serif;
+    margin-top: 6px;
+    color: #FDFEFE;
+    font-weight: bold;
+    padding-left: 5px;
+  }
+
+  .chat {
+    width: 490px;
+    /*height: 640px;*/
+    float: left;
+    background: #F2F5F8;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #434651;
+  }
+  .chat .chat-header {
+    background: #1A5276;
+    padding: 5px;
+    border-bottom: 2px solid white;
+    border-left: 2px solid white;
+  }
+  .chat .chat-header img {
+    float: left;
+    padding-left: 5px;
+  }
+
+  .chat .chat-header .avatar {
+    width: 100px;/*50*/
+    height: 100px;/*50*/
+  }
+
+  .chat .chat-header .chat-about {
+    float: left;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    padding-left: 10px;
+    margin-top: 6px;
+    color: #FDFEFE;
+  }
+  .name{
+    line-height: 1.6;
+    font-weight: regular;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    padding-left: 5px;
+    color: #FDFEFE;
+  }
+
+  .name1{
+    line-height: 1.6;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    padding-left: 5px;
+    color: #FDFEFE;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .name2{
+    padding-left: 2px;
+    font-family: Arial, sans-serif;
+  }
+
+  .name3{
+    line-height: 1.6;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    padding-left: 35px;
+    color: #FDFEFE;
+  }
+  .wordart {
+  font-family: Arial, sans-serif;
+  font-size: 4em;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wordart.radial .text {
+    line-height: 0.6;
+    background: #c9c9c0;
+    /* background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…BoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+); */
+    /*background: -moz-radial-gradient(center, ellipse cover, #fffa28 0%, #ec8a39 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #fffa28), color-stop(100%, #ec8a39));
+    background: -webkit-radial-gradient(center, ellipse cover, #fffa28 0%, #ec8a39 100%);
+    background: -o-radial-gradient(center, ellipse cover, #fffa28 0%, #ec8a39 100%);
+    background: -ms-radial-gradient(center, ellipse cover, #fffa28 0%, #ec8a39 100%);
+    background: radial-gradient(ellipse at center, #fffa28 0%, #ec8a39 100%);
+    background-clip: text;*/
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9c9b8b', endColorstr='#9c9b8b', GradientType=1);
+    font-family: Impact, sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+    padding-left: 15px;
+    padding-top: 1px;
+    padding-bottom: 100px;
+}
+
+  .chat .chat-header .chat-with {
+    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    font-weight: bold;/*regular*/
+    font-size: 16px;
+    padding-left: 10px;
+    color: #FDFEFE;
+  }
+  .chat .chat-header .chat-num-messages {
+    float: right;
+    line-height: 1.6;
+    color: #D0D3D4;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    font-padding-left: 10px;
+  }
+  .chat .chat-header .fa-star {
+    float: right;
+    color: #D8DADF;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    margin-top: 12px;
+  }
+  .chat .chat-history {
+    padding: 30px 30px 20px;
+    border-bottom: 2px solid white;
+    overflow-y: scroll;
+    height: 350px;/*250,400*/
+  }
+  .chat .chat-history .message-data {
+    margin-bottom: 28px;
+  }
+
+  .chat .chat-history .message-data img {
+    float: left;
+    max-width: 50px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 40%;
+  }
+
+  .chat .chat-history .message-data img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+  }
+
+  .chat .chat-history .message-data-time {
+    color: #F2F5F8;
+    padding-left: 0px;
+    padding-bottom: 1px;
+
+  }
+
+  .chat .chat-history .message-data-answer {
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+  }
+
+  .chat .chat-history .message-data-context {
+    font-style: italic;
+    font-family: Arial, sans-serif;
+    padding-bottom: 18px;
+  }
+
+  .chat .chat-history .message-data-link {
+    float: right;
+  }
+
+  .chat .chat-history .message {
+    color: white;
+    padding: 18px 20px;
+    line-height: 26px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    border-radius: 7px;
+    margin-bottom: 30px;
+    width: 90%;
+    position: relative;
+  }
+
+
+  .chat .chat-history .message:after {
+    bottom: 100%;
+    left: 7%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #86BB71;/**/
+    border-width: 10px;
+    margin-left: -10px;
+  }
+  .chat .chat-history .my-message {
+    background: #86BB71;
+  }
+  .chat .chat-history .other-message {
+    background: #94C2ED;
+  }
+  .chat .chat-history .other-message:after {
+    border-bottom-color: #94C2ED;
+    left: 93%;
+  }
+  .chat .chat-message {
+    padding: 30px;
+    height:70px;
+  }
+  .chat .chat-message textarea {
+    width: 100%;
+    border: none;
+    padding: 5px 10px;/*10,20*/
+    font: 14px/22px "Lato", Arial, sans-serif;
+    font-family: Arial, sans-serif;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    resize: none;
+  }
+  .chat .chat-message .fa-file-o, .chat .chat-message .fa-file-image-o {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    color: gray;
+    cursor: pointer;
+  }
+  .chat .chat-message button {
+    float: right;
+    color: #3498DB;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    background: #F2F5F8;
+  }
+  .chat .chat-message button:hover {
+    color: #1A5276;
+  }
+
+  .online, .offline, .me {
+    margin-right: 3px;
+    font-size: 10px;
+    font-family: Arial, sans-serif;
+  }
+
+  .online {
+    color: #86BB71;
+  }
+
+  .offline {
+    color: #E38968;
+  }
+
+  .me {
+    color: #94C2ED;
+  }
+
+  .align-left {
+    text-align: left;
+  }
+
+  .align-right {
+    text-align: right;
+  }
+
+  .float-right {
+    float: right;
+  }
+
+  .clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    font-family: Arial, sans-serif;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+
+  </style>
+
+
+  <link rel="apple-touch-icon" type="image/png" sizes="32x32" href="/static/images/Q&ALogo.png">
+  <link rel="shortcut icon" type="image/ico" sizes="32x32" href="/static/images/Q&ALogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/images/Q&ALogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/images/Q&ALogo.png">
+    
+   
+</head>
+
+<body>
+  
+  <div class="container clearfix">
+    <div class="people-list" id="people-list">
+      <ul class="list">
+        <li class="clearfix">
+          <!-- <img src="/static/images/wikipedia.png" class="avatar" alt="avatar" /> -->
+          <img src="https://cdn.clipart.email/b8a8cee04882e9c6b5049fdd34db3f15_test-your-knowledge-on-hydration-questions-and-answers-clipart-_397-529.png" class="avatar" alt="avatar" style= "width:220px;height:230px;" /><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <div class="project">ASK YOUR QUESTION</div><br>
+          
+         <br><div class="name">Hello, want to know about Viruses?</div><br>
+         <div class="name">We are here to clarify your doubts regarding any human virus.</div><br><br>
+         <br><div class="name1">Lets fight the war against Corona Virus together and win together!</div>
+        </li>
+      </ul> 
+    </div>
+    
+    <div class="chat">
+      <div class="chat-header clearfix">
+        <div class="chat-about">
+          <div class="name2">
+            <img src="https://cdn.clipart.email/b8a8cee04882e9c6b5049fdd34db3f15_test-your-knowledge-on-hydration-questions-and-answers-clipart-_397-529.png" height="100" width="100" /><div class="wordart radial"><span class="text"> COVID19 Q&A BOT</span></div></div>
+          <div class="chat-num-messages">Language: English</div>
+        </div>
+        <!-- <i class="fa fa-star"></i> -->
+      </div> <!-- end chat-header -->
+      <div class="chat-history">
+        <ul>
+        </ul>
+        
+      </div> <!-- end chat-history -->
+      <div class="chat-message clearfix">
+        <textarea name="message-to-send" id="message-to-send" placeholder ="Type your query" rows="2"></textarea>
+                
+        <!-- <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+        <i class="fa fa-file-image-o"></i> -->
+        
+        <button>Send</button>
+
+      </div> <!-- end chat-message -->
+      
+    </div> <!-- end chat -->
+    
+  </div> <!-- end container -->
+
+{% raw %}
+<script id="message-template" type="text/x-handlebars-template">
+  <li class="clearfix">
+    <div class="message-data align-right" ><img class="right" src="/static/images/user_image.png" height="42" width="42" alt="Avatar">
+    </div>
+    <div class="message other-message float-right">
+      <span class="message-data-answer">{{messageOutput}}</span>
+    </div>
+  </li>
+</script>
+
+<script id="message-response-template" type="text/x-handlebars-template">
+  <li>
+    <div class="message-data">
+      <span class="message-data-name"><img src="/static/images/robot_p.png" alt="Avatar" height="50" width="35"></span>
+      <span class="message-data-time">{{time}},Today</span>
+    </div>
+    <div class="message my-message">
+      <span class="message-data-answer">{{answer}}</span>
+      <p class="message-data-context">{{context}}
+      <a class="message-data-link" href={{link}}> Search_Web </a><br><br>
+      <a class="message-data-link" href="https://www.worldometers.info/coronavirus/">WHO_Stats </a></p> 
+    </div>
+  </li>
+</script>
+{% endraw %}
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js'></script>
+  <script  src="/static/js/index.js"></script>
+</body>
+
+</html>
